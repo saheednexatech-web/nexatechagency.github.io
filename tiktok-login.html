@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexaTech Autoposter - Connect TikTok</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #222;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #555;
+      margin-bottom: 30px;
+    }
+    .tiktok-btn {
+      background-color: #000;
+      color: #fff;
+      padding: 14px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .tiktok-btn:hover {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>NexaTech Autoposter</h1>
+  <p>Connect your TikTok account to enable automated posting</p>
+
+  <a class="tiktok-btn" href="#" id="connectBtn">Connect with TikTok</a>
+
+  <script>
+    // ---- CONFIGURE THESE VALUES ----
+    const clientKey = "sbawn1kj5oqe3bj5bs"; // Sandbox client key (swap to Production key later)
+    const redirectUri = "https://ultimmatenexatech-hugging8n.hf.space/webhook/tiktok-callback";
+    const scopes = "user.info.basic,video.publish,video.upload";
+    const state = "xyz123"; // can be randomized per session for security later
+
+    const authUrl = "https://www.tiktok.com/v2/auth/authorize/"
+      + "?client_key=" + encodeURIComponent(clientKey)
+      + "&response_type=code"
+      + "&scope=" + encodeURIComponent(scopes)
+      + "&redirect_uri=" + encodeURIComponent(redirectUri)
+      + "&state=" + encodeURIComponent(state);
+
+    document.getElementById("connectBtn").href = authUrl;
+  </script>
+</body>
+</html>
