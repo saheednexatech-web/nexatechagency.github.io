@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - NexaTech AI & Automation Experts</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/png" href="https://kommodo.ai/i/SdjmRcypV5s2CZAInEzS">
+  <link rel="apple-touch-icon" href="https://kommodo.ai/i/SdjmRcypV5s2CZAInEzS">
+  <style>
+    /* Page-specific overrides and animations */
+    .journey-timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-2xl) 0;
+    }
+
+    .journey-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: var(--color-primary);
+      transform: translateX(-50%);
+    }
+
+    .journey-item {
+      position: relative;
+      margin: var(--spacing-2xl) 0;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .journey-item:nth-child(odd) {
+      padding-right: calc(50% + var(--spacing-lg));
+      text-align: right;
+    }
+
+    .journey-item:nth-child(even) {
+      padding-left: calc(50% + var(--spacing-lg));
+    }
+
+    .journey-dot {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      top: 10px;
+      border: 4px solid var(--color-surface);
+      box-shadow: var(--shadow-md);
+    }
+
+    .journey-item:nth-child(odd) .journey-dot {
+      right: -40px;
+    }
+
+    .journey-item:nth-child(even) .journey-dot {
+      left: -40px;
+    }
+
+    .mission-card {
+      background: linear-gradient(135deg, var(--color-primary), #00cec9);
+      color: #fff;
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      margin: var(--spacing-2xl) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 60%;
+      height: 120%;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.15) 0%, transparent 70%);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-xl);
+      margin: var(--spacing-2xl) 0;
+    }
+
+    .team-member {
+      text-align: center;
+      transition: var(--transition-normal);
+    }
+
+    .team-member:hover {
+      transform: translateY(-8px);
+    }
+
+    .team-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary), #00cec9);
+      margin: 0 auto var(--spacing-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .team-avatar::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary), #00cec9);
+      z-index: -1;
+      opacity: 0.3;
+      animation: pulse 3s ease infinite;
+    }
+
+    .team-role {
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .team-bio {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      max-width: 250px;
+      margin: 0 auto;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
+    }
+
+    .value-card {
+      padding: var(--spacing-xl);
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      transition: var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-primary), #00cec9);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition-normal);
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .value-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .value-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(0, 184, 148, 0.1);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      font-size: 1.5rem;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">N</div>
+        NexaTech
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" style="min-height: 60vh;">
+      <div class="container">
+        <div class="hero-content">
+          <div>
+            <span class="hero-badge">OUR STORY</span>
+            <h1>Transforming Business Through AI & Automation</h1>
+            <p class="hero-subtitle">From a passionate team of automation experts to a leading AI solutions provider, discover how we've been shaping the future of business operations since 2019.</p>
+            <div class="hero-actions">
+              <a href="#journey" class="btn btn-primary">Our Journey</a>
+              <a href="#mission" class="btn btn-secondary">Our Mission</a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-card">
+              <div class="hero-card-header">
+                <div class="hero-card-avatar">15</div>
+                <div>
+                  <div class="hero-card-title">Years Experience</div>
+                  <div class="hero-card-subtitle">Since 2019</div>
+                </div>
+              </div>
+              <div class="hero-card-content">
+                <div class="feature-row">
+                  <div class="feature-icon">🤖</div>
+                  <div class="feature-text">
+                    <strong>Automation Experts</strong>
+                    <span>Specializing in n8n workflows</span>
+                  </div>
+                </div>
+                <div class="feature-row">
+                  <div class="feature-icon">🎯</div>
+                  <div class="feature-text">
+                    <strong>TikTok Integration</strong>
+                    <span>Advanced autoposter system</span>
+                  </div>
+                </div>
+                <div class="feature-row">
+                  <div class="feature-icon">📊</div>
+                  <div class="feature-text">
+                    <strong>AI Solutions</strong>
+                    <span>Custom machine learning</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Journey Timeline -->
+    <section id="journey" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">JOURNEY</span>
+          <h2>Our Story & Evolution</h2>
+          <p>The journey of NexaTech - from humble beginnings to industry leadership</p>
+        </div>
+
+        <div class="journey-timeline">
+          <div class="journey-item">
+            <div class="journey-dot"></div>
+            <div class="journey-content">
+              <h3>2019 - Foundation</h3>
+              <p>Started as a small automation consulting firm in Lagos, Nigeria. Began with manual process automation for local businesses, focusing on efficiency gains through simple scripts and workflows.</p>
+            </div>
+          </div>
+
+          <div class="journey-item" style="animation-delay: 0.2s;">
+            <div class="journey-dot"></div>
+            <div class="journey-content">
+              <h3>2020 - AI Focus</h3>
+              <p>Expanded into AI solutions, working with machine learning models and predictive analytics. Developed first internal TikTok automation tool for content scheduling.</p>
+            </div>
+          </div>
+
+          <div class="journey-item" style="animation-delay: 0.4s;">
+            <div class="journey-dot"></div>
+            <div class="journey-content">
+              <h3>2021 - n8n Integration</h3>
+              <p>Specialized in n8n workflow automation platform. Created complex multi-step automation pipelines for social media management and business processes.</p>
+            </div>
+          </div>
+
+          <div class="journey-item" style="animation-delay: 0.6s;">
+            <div class="journey-dot"></div>
+            <div class="journey-content">
+              <h3>2022 - TikTok Autoposter</h3>
+              <p>Developed and launched NexaTech Autoposter - a sophisticated TikTok automation system with real-time analytics and smart content scheduling.</p>
+            </div>
+          </div>
+
+          <div class="journey-item" style="animation-delay: 0.8s;">
+            <div class="journey-dot"></div>
+            <div class="journey-content">
+              <h3>2023 - Scale Up</h3>
+              <p>Reached 100+ active client campaigns. Expanded team to 10+ automation experts. Introduced enterprise-grade AI solutions for large corporations.</p>
+            </div>
+          </div>
+
+          <div class="journey-item" style="animation-delay: 1.0s;">
+            <div class="journey-dot"></div>
+            <div class="journey-content">
+              <h3>2024 - Global Reach</h3>
+              <p>Expanded services to international markets. Launched API integration platform for third-party developers. Introduced AI-powered analytics dashboard.</p>
+            </div>
+          </div>
+
+          <div class="journey-item" style="animation-delay: 1.2s;">
+            <div class="journey-dot"></div>
+            <div class="journey-content">
+              <h3>2025 - Innovation Hub</h3>
+              <p>Currently operating as a premier AI and automation innovation hub, serving businesses worldwide with cutting-edge solutions including advanced TikTok automation and custom AI implementations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission & Values -->
+    <section id="mission" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">VALUES</span>
+          <h2>Our Mission & Core Values</h2>
+          <p>The principles that drive everything we do at NexaTech</p>
+        </div>
+
+        <div class="mission-card">
+          <h2>Our Mission</h2>
+          <p style="font-size: 1.25rem; line-height: 1.8; max-width: 800px; margin: var(--spacing-xl) auto;">To democratize AI and automation by providing intelligent solutions that transform business operations, enhance productivity, and unlock new possibilities for growth. We believe in making advanced technology accessible to businesses of all sizes, empowering them to compete in the digital economy.</p>
+        </div>
+
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon">🎯</div>
+            <h3>Excellence</h3>
+            <p>We strive for perfection in every line of code, every workflow we build, and every solution we deliver. Quality is never compromised.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">🚀</div>
+            <h3>Innovation</h3>
+            <p>We stay ahead of technology trends, constantly exploring new AI capabilities and automation techniques to give our clients a competitive edge.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">🤝</div>
+            <h3>Integrity</h3>
+            <p>Built on trust and transparency. We believe in honest partnerships and clear communication throughout every project.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">📈</div>
+            <h3>Impact</h3>
+            <p>Every solution we create is designed to make a measurable difference in our clients' businesses, driving real results and growth.</p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon">👥</div>
+            <h3>Collaboration</h3>
+            <p>We believe in the power of teamwork, both within our organization and with our clients. Great things happen when we work together.</p>
+          </div>
+
+          <div class="value-icon">🌍</div>
+          <h3>Sustainability</h3>
+          <p>We're committed to creating solutions that are not only effective but also sustainable in the long run, both environmentally and economically.</p>\n        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section" style="background: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">TEAM</span>
+          <h2>Meet Our Expert Team</h2>
+          <p>The brilliant minds behind NexaTech's innovations</p>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="team-avatar">A</div>
+            <h3>Akinyemi Ifeoluwa</h3>
+            <div class="team-role">Founder & CEO</div>
+            <p class="team-bio">10+ years in automation and AI, former software engineer at major tech companies</p>
+          </div>
+
+          <div class="team-member">
+            <div class="team-avatar">M</div>
+            <h3>Saheed Mayo</h3>
+            <div class="team-role">Lead AI Engineer</div>
+            <p class="team-bio">Specialist in machine learning models and neural networks, PhD in Computer Science</p>
+          </div>
+
+          <div class="team-member">
+            <div class="team-avatar">K</div>
+            <h3>Kevin Chen</h3>
+            <div class="team-role">n8n Architect</div>
+            <p class="team-bio">Expert in workflow automation and API integrations, built 500+ complex workflows</p>
+          </div>
+
+          <div class="team-member">
+            <div class="team-avatar">S</div>
+            <h3>Sarah Williams</h3>
+            <div class="team-role">TikTok Strategy Lead</div>
+            <p class="team-bio">Social media marketing expert with 8+ years in TikTok growth strategies</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">NexaTech</a>
+          <p>AI & Automation Experts transforming businesses through intelligent technology solutions since 2019.</p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#process">Process</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">TikTok Autoposter</a></li>
+            <li><a href="#">n8n Workflows</a></li>
+            <li><a href="#">AI Solutions</a></li>
+            <li><a href="#">API Integration</a></li>
+            <li><a href="#">Automation Consulting</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:nexatech26@gmail.com">nexatech26@gmail.com</a></li>
+            <li>Lagos, Nigeria</li>
+            <li>+234 803 123 4567</li>
+            <li><a href="#">Live Chat</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 NexaTech. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      mobileMenuBtn.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        mobileMenuBtn.classList.remove('active');
+      });
+    });
+
+    // Header scroll effect
+    let lastScroll = 0;
+    const header = document.querySelector('.header');
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+
+      // Add animation to elements on scroll
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementBottom = element.getBoundingClientRect().bottom;\n
+        if (elementTop < window.innerHeight && elementBottom > 0) {
+          element.classList.add('visible');
+        }
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Update active navigation link on scroll
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Initialize animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
